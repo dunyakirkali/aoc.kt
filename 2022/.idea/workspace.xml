@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6eb5c2d-40f0-4561-9da1-cdb070b90ef5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../2021/src/main/kotlin/day4/day4.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../2021/src/main/resources/day4/input.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../2021/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../2021/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,10 +42,13 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "last_opened_file_path": "/Users/dunyakirkali/Projects/dunyakirkali/aoc.kt/2022",
-    "settings.editor.selected.configurable": "preferences.sourceCode.Kotlin"
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/day2" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="day1" />
     </key>
