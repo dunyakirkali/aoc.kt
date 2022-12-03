@@ -29,17 +29,18 @@ fun part1(): Int {
     }.sum()
 }
 
-//fun part2(): Int {
-//    return input.map { line ->
-//        line.split(' ').let { it[0] to it[1] }
-//    }.map { round: Pair<String, String> ->
-//        interpret2(round)
-//    }.sumOf {
-//        scoreMove(it.second) + scoreRound(it)
-//    }
-//}
+fun part2(): Int {
+    return input
+        .map { line ->
+            line.toSet()
+        }
+        .windowed(3, 3)
+        .flatMap { group ->
+            group.fold(group.first()) { acc, next -> acc.intersect(next) }
+        }.sum()
+}
 
 fun main() {
     println("part 1 = ${part1()}")
-//    println("part 2 = ${part2()}")
+    println("part 2 = ${part2()}")
 }
