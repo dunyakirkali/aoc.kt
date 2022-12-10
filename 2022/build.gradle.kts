@@ -14,6 +14,9 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
+    implementation("org.jgrapht:jgrapht-core:1.5.1")
+    implementation("org.jetbrains.kotlinx:multik-core:0.2.1")
+    implementation("org.jetbrains.kotlinx:multik-default:0.2.1")
 }
 
 tasks.test {
