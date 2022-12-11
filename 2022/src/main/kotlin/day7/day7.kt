@@ -1,56 +1,109 @@
 package day7
 
-import org.jgrapht.Graph
 import org.jgrapht.graph.DefaultDirectedGraph
 import org.jgrapht.graph.DefaultEdge
 import java.io.File
 
-
-val input: Pair<DefaultDirectedGraph<String, DefaultEdge>, List<String>> =
+val input: Triple<DefaultDirectedGraph<String, DefaultEdge>, List<String>, MutableMap<String, Int>> =
     File("src/main/resources/day7/input.txt")
         .readText(Charsets.UTF_8)
         .trim()
         .split("\n")
         .fold(
-            Pair(
+            Triple(
                 DefaultDirectedGraph<String, DefaultEdge>(DefaultEdge::class.java),
-                emptyList()
+                emptyList(),
+                HashMap<String, Int>()
             )
-        ) { (acc, cwd), line ->
+        ) { (acc, cwd, sizes), line ->
             when {
                 line.startsWith("$") -> {
                     when {
                         line.startsWith("$ cd") -> {
-                            val (_, _, folder) = line.split(" ")
+                            val (_, _, folder) = line.trim().split(" ")
                             if (folder == "..") {
-                                Pair(acc, cwd)
+                                val newCwd = cwd.drop(1)
+                                Triple(acc, newCwd, sizes)
                             } else {
-                                Pair(acc, cwd)
+                                val newCwd = listOf(folder) + cwd
+                                Triple(acc, newCwd, sizes)
                             }
                         }
 
-                        else -> Pair(acc, cwd)
+                        else -> Triple(acc, cwd, sizes)
                     }
                 }
 
-                line.startsWith("dir") -> Pair(acc, cwd)
+                line.startsWith("dir") -> {
+                    val (_, folder) = line.trim().split(" ")
+                    val path = cwd.joinToString("/")
+                    val toPath = (listOf(folder) + cwd).joinToString("/")
+
+                    acc.addVertex(path)
+                    acc.addVertex(toPath)
+                    acc.addEdge(path, toPath)
+
+                    Triple(acc, cwd, sizes)
+                }
+
                 else -> {
                     val (size, file) = line.split(" ")
                     val path = cwd.joinToString("/")
+                    val toPath = (listOf(file) + cwd).joinToString("/")
+                    sizes[toPath] = size.toInt()
 
-                    Pair(acc, cwd)
+                    acc.addVertex(toPath)
+                    acc.addEdge(path, toPath)
+
+                    Triple(acc, cwd, sizes)
                 }
             }
         }
 
+fun sizes(graph: DefaultDirectedGraph<String, DefaultEdge>, vertex: String, sizes: MutableMap<String, Int>): Int {
+    val outEdges = graph.outgoingEdgesOf(vertex)
+    return if (outEdges.isEmpty()) {
+        sizes[vertex] ?: 0
+    } else {
+        outEdges.sumOf {
+            sizes(graph, graph.getEdgeTarget(it), sizes)
+        }
+    }
+}
+
 fun part1(): Int {
-    println(input)
-    return 4
+    val (graph, _, sizes) = input
+    return graph
+        .vertexSet()
+        .filter {
+            !sizes.keys.contains(it)
+        }
+        .map {
+            sizes(graph, it, sizes)
+        }
+        .filter {
+            it < 100_000
+        }
+        .sum()
 }
 
 /**/
 fun part2(): Int {
-    return 3
+    val (graph, _, sizes) = input
+    val available = 70_000_000
+    val used = sizes(graph, "/", sizes)
+
+    return graph
+        .vertexSet()
+        .filter {
+            !sizes.keys.contains(it)
+        }
+        .map {
+            sizes(graph, it, sizes)
+        }
+        .filter {
+            (used - it) < 40_000_000
+        }.min()
 }
 
 fun main() {
