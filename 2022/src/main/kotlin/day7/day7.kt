@@ -13,7 +13,7 @@ val input: Triple<DefaultDirectedGraph<String, DefaultEdge>, List<String>, Mutab
             Triple(
                 DefaultDirectedGraph<String, DefaultEdge>(DefaultEdge::class.java),
                 emptyList(),
-                HashMap<String, Int>()
+                HashMap()
             )
         ) { (acc, cwd, sizes), line ->
             when {
@@ -90,7 +90,6 @@ fun part1(): Int {
 /**/
 fun part2(): Int {
     val (graph, _, sizes) = input
-    val available = 70_000_000
     val used = sizes(graph, "/", sizes)
 
     return graph
