@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e6eb5c2d-40f0-4561-9da1-cdb070b90ef5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/day7/day7.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/day7/day7.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +61,7 @@
       <recent name="day1" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Gradle.clean">
     <configuration name="build" type="GradleRunConfiguration" factoryName="Gradle">
       <ExternalSystemSettings>
         <option name="executionName" />
