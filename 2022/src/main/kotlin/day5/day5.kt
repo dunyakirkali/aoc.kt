@@ -44,7 +44,7 @@ fun part1(): String {
             acc[to] = first.reversed().plus(toItems)
             acc
         }
-        .map { (key, value) ->
+        .map { (_, value) ->
             value.first()
         }
         .joinToString("")
@@ -76,7 +76,7 @@ fun part2(): String {
             acc[to] = first.plus(toItems)
             acc
         }
-        .map { (key, value) ->
+        .map { (_, value) ->
             value.first()
         }
         .joinToString("")
