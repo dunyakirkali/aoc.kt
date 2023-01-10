@@ -21,7 +21,7 @@ val input: List<Instruction> =
       }
     }
 
-fun part1(): Int {
+fun positions(): MutableList<Int> {
   return generateSequence { input }
       .flatten()
       .take(SIZE)
@@ -40,6 +40,10 @@ fun part1(): Int {
         }
       }
       .second
+}
+
+fun part1(): Int {
+  return positions()
       .filterIndexed { index, _ -> cycles.contains(index + 1) }
       .zip(cycles)
       .map { (x, cycle) -> x * cycle }
@@ -47,29 +51,9 @@ fun part1(): Int {
 }
 
 fun part2(): String {
-  val positions =
-      generateSequence { input }
-          .flatten()
-          .take(SIZE)
-          .fold(Pair(1, mutableListOf<Int>(1))) { (x, collected), instruction ->
-            when (instruction) {
-              is Instruction.Noop -> {
-                collected.add(x)
-                Pair(x, collected)
-              }
-              is Instruction.AddX -> {
-                val nx: Int = x + instruction.value
-                collected.add(x)
-                collected.add(nx)
-                Pair(nx, collected)
-              }
-            }
-          }
-          .second
-
   return (0..(SIZE - 1))
       .mapIndexed { index, x ->
-        val scanner = positions.elementAt(index)
+        val scanner = positions().elementAt(index)
         if (scanner - 1 <= (x % 40) && (x % 40) <= scanner + 1) "#" else "."
       }
       .chunked(40)
