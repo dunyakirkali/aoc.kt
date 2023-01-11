@@ -33,4 +33,7 @@ fun main(args: Array<String>) {
 
   println("\nDay 19")
   day19.main()
+
+  println("\nDay 24")
+  day24.main()
 }
